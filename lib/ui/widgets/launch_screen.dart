@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markrun/domain/models/userInfo.dart';
 import 'package:markrun/ui/core/ui/logo.dart';
+import 'package:markrun/ui/core/ui/logo_area.dart';
+import 'package:markrun/ui/core/ui/protocol/launch_protocol.dart';
 import 'package:markrun/ui/core/ui/single_button.dart';
 
 @RoutePage()
@@ -35,6 +37,15 @@ class LaunchScreenState extends State<LaunchScreen>{
                 )
             ),
           ),
+          // logo text
+          Positioned(
+            top: 82,
+            bottom: 410,
+              left: 26,
+              right: 29,
+              child: LogoArea()
+          ),
+          // logo
           Positioned(
             top: 282,
             bottom: 428,
@@ -44,6 +55,7 @@ class LaunchScreenState extends State<LaunchScreen>{
               child: Logo(),
             ),
           ),
+          // button
           Positioned(
               //top: 568,
               bottom: 180,
@@ -51,6 +63,14 @@ class LaunchScreenState extends State<LaunchScreen>{
               right: 37.5,
               child: SingleButton(event: (){}, textStr: 'START',height: 64,width: 300,),
           ),
+          // protocol
+          Positioned(
+            //top: 657,
+              bottom: 89,
+              left: 37,
+              right: 38,
+              child: LaunchProtocol(),
+          )
         ],
       )
     );
