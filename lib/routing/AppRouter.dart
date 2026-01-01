@@ -5,6 +5,9 @@ import 'package:markrun/routing/AppRouter.gr.dart';
 class AppRouter extends RootStackRouter{
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: LaunchRoute.page,initial: true)
+    AutoRoute(page: LaunchRoute.page,initial: true),
+    AutoRoute(page: WebRoute.page),
+    AutoRoute(page: RegisterHomeRoute.page),
+    AutoRoute(page: RegisterRoute1.page)
   ];
 }

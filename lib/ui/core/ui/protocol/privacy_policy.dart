@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markrun/routing/AppRouter.dart';
@@ -13,20 +14,20 @@ class PrivacyPolicy extends StatefulWidget{
 }
 
 class PrivacyPolicyState extends State<PrivacyPolicy>{
-  final _appRouter = AppRouter();
-  late final WebViewController _controller ;
-
-  @override
-  void initState() {
-    _controller = WebViewController()..loadRequest(Uri.parse(widget.webUrl));
-    super.initState();
-  }
+  // late final WebViewController _controller ;
+  //
+  // @override
+  // void initState() {
+  //   _controller = WebViewController()..loadRequest(Uri.parse(widget.webUrl));
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: (){
-          _appRouter.push(WebRoute(webUrl: widget.webUrl));
+    return GestureDetector(
+        onTap: (){
+          debugPrint('Privacy Policy: click');
+          AutoRouter.of(context).push(WebRoute(webUrl: widget.webUrl));
         },
         child: Text(
           widget.text,

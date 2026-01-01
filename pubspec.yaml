@@ -41,6 +41,9 @@ dependencies:
   image: any
   webview_flutter: any
   flutter_svg: any
+  flutter_gradient_text: any
+  webview_flutter_web: any
+  webview_windows: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -73,11 +76,17 @@ flutter:
 
   assets:
     - assets/img/logo.png
+    - assets/img/register_1.png
+    - assets/img/female.png
+    - assets/img/male.png
+    - assets/img/unselected_female.png
+
     - assets/svg/logo_text.svg
     - assets/svg/ellipse_active.svg
     - assets/svg/ellipse_sleep.svg
     - assets/svg/toggle_1.svg
     - assets/svg/toggle_2.svg
+    - assets/svg/subtract_sexframe.svg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

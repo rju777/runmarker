@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:markrun/routing/AppRouter.dart';
 import 'package:markrun/routing/AppRouter.gr.dart';
@@ -12,20 +13,20 @@ class UserAgreement extends StatefulWidget{
 }
 
 class UserAgreementState extends State<UserAgreement>{
-  final _appRouter = AppRouter();
-  late final WebViewController _controller ;
-
-  @override
-  void initState() {
-    _controller = WebViewController()..loadRequest(Uri.parse(widget.webUrl));
-    super.initState();
-  }
+  // late final WebViewController _controller ;
+  //
+  // @override
+  // void initState() {
+  //   _controller = WebViewController()..loadRequest(Uri.parse(widget.webUrl));
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: (){
-          _appRouter.push(WebRoute(webUrl: widget.webUrl));
+    return GestureDetector(
+        onTap: (){
+          debugPrint('User Agreement: click');
+          AutoRouter.of(context).push(WebRoute(webUrl: widget.webUrl));
         },
         child: Text(
             widget.text,

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class SingleButton extends StatefulWidget{
   /// 事件
-  final FutureOr<void> event;
+  final VoidCallback event;
   final String textStr;
   final Color backgroundColor;
   final Color textColor;
@@ -28,7 +28,7 @@ class SingleButton extends StatefulWidget{
 class SingleButtonState extends State<SingleButton>{
   Future<void> _click()async{
     try{
-      await widget.event;
+      widget.event();
       debugPrint('Single Button: click');
     }catch(e){
       debugPrint('Single Button: error $e');
@@ -37,30 +37,30 @@ class SingleButtonState extends State<SingleButton>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56,
-      width: 200,
-      child: GestureDetector(
+    return GestureDetector(
         onTap: _click,
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Text(
+        child: Container(
+          height: 56,
+          width: 200,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
                 widget.textStr,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: widget.textColor,
-                fontStyle: FontStyle.italic
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: widget.textColor,
+                    fontStyle: FontStyle.italic
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: widget.backgroundColor
-      ),
-    );
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: widget.backgroundColor
+          ),
+        )
+      );
   }
 }
