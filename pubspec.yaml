@@ -35,6 +35,8 @@ dependencies:
   auto_route: ^9.0.0
   photo_manager: any
   flutter_bloc: ^8.1.3
+  flutter_provider: any
+  provider: any
   equatable: ^2.0.5
   permission_handler: any
   path_provider: any
@@ -77,9 +79,13 @@ flutter:
   assets:
     - assets/img/logo.png
     - assets/img/register_1.png
-    - assets/img/female.png
-    - assets/img/male.png
     - assets/img/unselected_female.png
+    - assets/img/unselected_male.png
+    - assets/img/selected_female.png
+    - assets/img/selected_male.png
+    - assets/img/birth_background.png
+    - assets/img/tall_background.png
+    - assets/img/weight_background.png
 
     - assets/svg/logo_text.svg
     - assets/svg/ellipse_active.svg

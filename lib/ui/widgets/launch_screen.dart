@@ -28,6 +28,7 @@ with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
+    // animation
     _controller = AnimationController(
         vsync: this,
       duration: const Duration(milliseconds: 150)
@@ -63,10 +64,11 @@ with TickerProviderStateMixin{
             curve: Curves.easeInOut
         )
     );
-    debugPrint('Screen: showing LaunchScreen');
+    // jump route
+    _delayJump();
   }
 
-  void _clickStart()async{
+  void _clickStart(){
     if(!isAccepted){
       // start shaking animation
       _buttonShake();
@@ -88,6 +90,19 @@ with TickerProviderStateMixin{
     debugPrint('Launch Page: button shaking');
   }
 
+  Future<void> _delayJump()async{
+    debugPrint('Launch Page: loading...');
+    await Future.delayed(const Duration(seconds: 4),(){
+      debugPrint('Launch Page: loading finished');
+    });
+    await Future.delayed(const Duration(seconds: 2),(){
+      if(mounted){
+        AutoRouter.of(context).push(HomeRoute());
+        debugPrint('Launch Page: jump to home page...');
+      }
+    });
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -96,7 +111,6 @@ with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('${widget._userInfo.firstLaunch} first launch?');
     if(widget._userInfo.firstLaunch){
       return Scaffold(
         //appBar: AppBar(title: Text('launch page'),),
@@ -205,7 +219,7 @@ with TickerProviderStateMixin{
             ],
           )
       );
-    }else{
+    } else{
       return Scaffold(
         //appBar: AppBar(title: Text('launch page'),),
           body: Stack(

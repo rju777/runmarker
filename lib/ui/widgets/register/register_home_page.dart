@@ -35,7 +35,7 @@ class RegisterHomePageState extends State<RegisterHomePage>{
             top: 475,
               left: 27,
               right: 28,
-              bottom: 173,
+              //bottom: 173,
               child: Container(
                 // width: 320,
                 // height: 164,
