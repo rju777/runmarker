@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markrun/domain/models/userInfo.dart';
 import 'package:markrun/routing/AppRouter.dart';
 import 'package:webview_flutter/webview_flutter.dart';

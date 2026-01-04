@@ -65,7 +65,9 @@ with TickerProviderStateMixin{
         )
     );
     // jump route
-    _delayJump();
+    if(!widget._userInfo.firstLaunch){
+      _delayJump();
+    }
   }
 
   void _clickStart(){

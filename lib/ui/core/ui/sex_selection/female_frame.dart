@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:markrun/ui/core/ui/toggle.dart';
 
 class FemaleFrame extends StatelessWidget{
   final VoidCallback event;
@@ -20,12 +21,13 @@ class FemaleFrame extends StatelessWidget{
               width: 184,
               height: 197,
               fit: BoxFit.contain,
-            ) : Image.asset(
+            )
+                : Image.asset(
               'assets/img/unselected_female.png',
               width: 173,
               height: 188,
               fit: BoxFit.contain,
-            )
+            ),
         )
     );
   }

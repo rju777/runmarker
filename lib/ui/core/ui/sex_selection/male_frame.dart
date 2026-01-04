@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:markrun/ui/core/ui/toggle.dart';
 
 class MaleFrame extends StatelessWidget{
   final VoidCallback event;
@@ -23,12 +24,13 @@ class MaleFrame extends StatelessWidget{
               width: 184,
               height: 197,
               fit: BoxFit.contain,
-            ) : Image.asset(
+            )
+                : Image.asset(
               'assets/img/unselected_male.png',
               width: 170,
               height: 182,
               fit: BoxFit.contain,
-            )
+            ),
         )
     );
   }

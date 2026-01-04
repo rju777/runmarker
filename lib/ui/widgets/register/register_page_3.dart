@@ -19,10 +19,12 @@ class RegisterPage3 extends StatefulWidget{
   State<StatefulWidget> createState() => RegisterPage3State();
 }
 
-class RegisterPage3State extends State<RegisterPage3>{
+class RegisterPage3State extends State<RegisterPage3>
+with TickerProviderStateMixin{
   List<int> _tall = List.generate(151, (index)=> 100+index);
 
   int _selectTall = 160;
+  bool _isCM = true;
 
   void _clickNext(){
     widget._userInfo.height = _selectTall;
@@ -96,14 +98,109 @@ class RegisterPage3State extends State<RegisterPage3>{
                               fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(height: 13,),
+                        const SizedBox(height: 13,),
                         Text(
                           widget.content,
                           softWrap: true,
                           style: TextStyle(
-                              fontSize: 16
+                              fontSize: 16,
+                              color: Color(0xFF676767)
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 12,),
+                        // height button
+                        Container(
+                          alignment: Alignment.center,
+                          width: 180,
+                          height: 46,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(35),
+                              color: Color(0xFFF4F4F4),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(-1, 1),
+                                blurRadius: 0.5,
+                                spreadRadius: 0.5,
+                                color: Colors.black12
+                              )
+                            ]
+                          ),
+                          child: Stack(
+                            children: [
+                              // 底层背景
+                              AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                                margin: EdgeInsets.only(
+                                  left:  _isCM ? 0:94
+                                ),
+                                width: 94,
+                                height: 46,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    gradient: LinearGradient(
+                                        stops: [0.05,1.0],
+                                        colors: [
+                                          Color(0xFFFFED29),
+                                          Color(0xFFC9FF6B)
+                                        ]
+                                    )
+                                ),
+                              ),
+                              // 上层文本
+                              Row(
+                                children: [
+                                  // CM
+                                  GestureDetector(
+                                    onTap: (){
+                                      if(!_isCM){
+                                        setState(() {
+                                          _isCM = true;
+                                        });
+                                      }
+                                      debugPrint('Register: click CM');
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: 94,
+                                      height: 46,
+                                      child: Text(
+                                        'CM',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: _isCM ? Color(0xFF68890A) : Color(0xFFC0C0C0)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // FT
+                                  GestureDetector(
+                                    onTap: (){
+                                      if(_isCM){
+                                        setState(() {
+                                          _isCM = false;
+                                        });
+                                      }
+                                      debugPrint('Register: click FT');
+                                    },
+                                    child: Container(
+                                        alignment: Alignment.center,
+                                        width: 86,
+                                        height: 46,
+                                        child: Text(
+                                          'FT',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: _isCM ? Color(0xFFC0C0C0) : Color(0xFF68890A)
+                                          ),
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        ),
                       ],
                     ),
                   )

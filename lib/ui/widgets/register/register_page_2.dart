@@ -92,7 +92,8 @@ class RegisterPage2State extends State<RegisterPage2>{
                         Text(
                           widget.content,
                           style: TextStyle(
-                              fontSize: 16
+                              fontSize: 16,
+                              color: Color(0xFF676767)
                           ),
                         )
                       ],

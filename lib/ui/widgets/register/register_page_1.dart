@@ -4,12 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markrun/domain/models/sex.dart';
 import 'package:markrun/domain/models/userInfo.dart';
 import 'package:markrun/routing/AppRouter.gr.dart';
 import 'package:markrun/ui/core/ui/sex_selection/female_frame.dart';
 import 'package:markrun/ui/core/ui/sex_selection/male_frame.dart';
 import 'package:markrun/ui/core/ui/single_button.dart';
+import 'package:markrun/ui/core/ui/toggle.dart';
+import 'package:markrun/utils/toggles_manager/single_toggle.dart';
 import 'package:markrun/utils/toggles_manager/toggles_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +21,7 @@ class RegisterPage1 extends StatefulWidget{
   final _userInfo = UserInfo();
   final String firstTitle = "What's your gender?";
   final String content = 'Calories & Stride Length Calculation need it';
+  final String toast = 'Please select your gender';
 
   @override
   State<StatefulWidget> createState() => _RegisterPage1State();
@@ -74,6 +78,14 @@ with TickerProviderStateMixin{
     if(!_isSeleted){
       // start shaking animation
       _buttonShake();
+      Fluttertoast.showToast(
+          msg: widget.toast,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black12,
+        fontSize: 14
+      );
       debugPrint('Register Page1: not select sex!');
     }
     else{
@@ -144,7 +156,8 @@ with TickerProviderStateMixin{
                           Text(
                             widget.content,
                             style: TextStyle(
-                                fontSize: 16
+                                fontSize: 16,
+                              color: Color(0xFF676767)
                             ),
                           )
                         ],
@@ -161,7 +174,7 @@ with TickerProviderStateMixin{
                 child: Consumer<TogglesManager>(
                     builder: (context,manager,child){
                       return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaleFrame(
                             isSelected: manager.selectedIndex == 0,
@@ -182,7 +195,47 @@ with TickerProviderStateMixin{
                                 });
                                 debugPrint('Register Page1: select male');
                               }
-                          )
+                          ),
+                        ],
+                      );
+                    }
+                )
+            ),
+            Positioned(
+                top: 451,
+                //bottom: 339,
+                left: 40,
+                right: 61,
+                child: Consumer<TogglesManager>(
+                    builder: (context,manager,child){
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SingleToggle(
+                            event: (){},
+                            isToggle: _togglesManager.selectedIndex == 0,
+                          ),
+                          const SizedBox(width: 4,),
+                          Text(
+                            'Female',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                         const SizedBox(width: 95,),
+                          SingleToggle(
+                            event: (){},
+                            isToggle: _togglesManager.selectedIndex == 1,
+                          ),
+                          const SizedBox(width: 4,),
+                          Text(
+                            'Male',
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
                         ],
                       );
                     }

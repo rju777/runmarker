@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:markrun/domain/models/userInfo.dart';
+import 'package:markrun/routing/AppRouter.gr.dart';
 import 'package:markrun/ui/core/ui/single_button.dart';
 import 'package:markrun/utils/save_files/save_files.dart';
 
@@ -22,13 +23,17 @@ class RegisterPage4State extends State<RegisterPage4>{
   List<int> _weight = List.generate(271, (index)=> 20+index);
 
   int _selectWeight = 55;
+  bool _isKG = true;
 
-  void _clickNext(){
+  void _clickNext()async{
+    debugPrint('Register: set weight: ${widget._userInfo.weight}');
+    debugPrint('Register: save data...');
+    debugPrint('Register Page4: over register...');
     widget._userInfo.weight = _selectWeight;
     widget._userInfo.register();
-    //AutoRouter.of(context).push();
-    debugPrint('Register: set weight: ${widget._userInfo.weight}');
-    debugPrint('Register Page4: over register...');
+    Future.delayed(const Duration(seconds: 3));
+    AutoRouter.of(context).push(HomeRoute());
+    debugPrint('Register Page4: jump to home page...');
   }
 
   @override
@@ -91,25 +96,121 @@ class RegisterPage4State extends State<RegisterPage4>{
                         Text(
                           widget.firstTitle,
                           softWrap: true,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(height: 13,),
+                        const SizedBox(height: 13,),
                         Text(
                           widget.content,
                           softWrap: true,
                           style: TextStyle(
-                              fontSize: 16
+                              fontSize: 16,
+                              color: Color(0xFF676767)
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 12,),
+                        // weight button
+                        Container(
+                            alignment: Alignment.center,
+                            width: 180,
+                            height: 46,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(35),
+                                color: Color(0xFFF4F4F4),
+                                boxShadow: [
+                                  BoxShadow(
+                                      offset: Offset(-1, 1),
+                                      blurRadius: 0.5,
+                                      spreadRadius: 0.5,
+                                      color: Colors.black12
+                                  )
+                                ]
+                            ),
+                            child: Stack(
+                              children: [
+                                // 底层背景
+                                AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                  margin: EdgeInsets.only(
+                                      left:  _isKG ? 0:94
+                                  ),
+                                  width: 94,
+                                  height: 46,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      gradient: LinearGradient(
+                                          stops: [0.05,1.0],
+                                          colors: [
+                                            Color(0xFFFFED29),
+                                            Color(0xFFC9FF6B)
+                                          ]
+                                      )
+                                  ),
+                                ),
+                                // 上层文本
+                                Row(
+                                  children: [
+                                    // CM
+                                    GestureDetector(
+                                      onTap: (){
+                                        if(!_isKG){
+                                          setState(() {
+                                            _isKG = true;
+                                          });
+                                        }
+                                        debugPrint('Register: click KG');
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: 94,
+                                        height: 46,
+                                        child: Text(
+                                          'KG',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: _isKG ? Color(0xFF68890A) : Color(0xFFC0C0C0)
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // FT
+                                    GestureDetector(
+                                      onTap: (){
+                                        if(_isKG){
+                                          setState(() {
+                                            _isKG = false;
+                                          });
+                                        }
+                                        debugPrint('Register: click LBS');
+                                      },
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          width: 86,
+                                          height: 46,
+                                          child: Text(
+                                            'LBS',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: _isKG ? Color(0xFFC0C0C0) : Color(0xFF68890A)
+                                            ),
+                                          )
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                        ),
                       ],
                     ),
                   )
               )
           ),
-          // height selection
+          // weight selection
           Positioned(
               top: 261,
               bottom: 338,
